@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JS library</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+<div class="bookform">
+	
+	<span id="closeForm">&#215</span>
+	<div class="formcontainer">
+		<form id="addForm">
+			<div class="field">
+				<label for="title">Book title</label>
+				<input type="text" name="title" id="title" value="Title">
+			</div>
+			<div class="field">
+				<label for="author">Author</label>
+				<input type="text" name="author" id="author" value="author">
+			</div>
+			<div class="field">
+				<label for="pagecount">Page count</label>
+				<input type="number" name="pagecount" value="23">
+			</div>
+			<div class="field">
+				<label for="isRead">Is it read?</label>
+				<input type="checkbox" name="isRead" id="isRead" checked="">
+			</div>
+		</form>
+		<input type="submit" value="Add a book" id="booksubmit">
+	</div>
+</div>
+<div class="container">
+	<div class="library">
+	</div>
+	<button id="addBook">Add a new book to the collection</button>
+</div>
+
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Roboto';
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+button {
+	border: 0;
+	background: none;
+}
+
+button:hover{
+	cursor: pointer;
+}
+
+.book {
+	margin: 20px;
+	font-size: 1.5em;
+	text-align: center;
+	display: inline-block;
+	border-radius: 5px;
+	border: 1px solid black;
+	padding: 10px 10px;
+	width: 250px;
+}
+
+.book p{
+	margin: 5px;
+}
+#removeBook{
+	width: 80%;
+	background-color: gray;
+	padding: 10px 5px;
+}
+
+#toggleRead{
+	width: 80%;
+	background-color: gray;
+	padding: 10px 5px;
+	margin-top: 10px;
+}
+
+.library {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	flex-wrap: wrap;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	width: 50%;
+	border: 1px solid black;
+	height: 300px;
+}
+
+.container{
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#addBook{
+	margin-top: 20px;
+}
+
+.bookform{
+	width: 300px;
+	background-color: red;
+	border-radius:  5px;
+
+	height: 200px;
+	z-index: 1;
+	position: fixed;
+	margin: auto;
+
+	display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    animation-name: animatetop;
+	animation-duration: 0.75s;
+}
+
+@keyframes animatetop {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+.formcontainer{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	height: 100%;
+}
+
+form {
+	margin: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	
+}
+
+.field{
+	margin-top: 10px;
+}
+
+.field:not(:last-child){
+	align-self: flex-end;
+}
+
+.field:last-child label{
+	margin: 5px;
+}
+
+#booksubmit{
+	background: none;
+	border: 0;
+	padding: 10px 20px;
+	width: 50%;
+	margin: auto;
+	margin-bottom: 10px;
+
+	background-color: blue;
+	border-radius: 5px;
+}
+
+#booksubmit:hover{
+	cursor: pointer;
+}
+
+#closeForm{
+	position: absolute;
+	right: 5px;
+	top: 0;
+	font-size: 1.6em;
+}
+
+#closeForm:hover{
+	cursor: pointer;
+	color: blue;
+}
