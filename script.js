@@ -47,28 +47,51 @@ function openForm(){
 	addForm.style.display = 'flex'
 }
 
-function addRemoveBookButton(bookDiv){
+function addButtons(bookDiv){
 	let toggleBook = document.createElement('button')
 		toggleBook.setAttribute("id", "toggleRead")
-		toggleBook.innerText = 'Read';
+		if(myLibrary[bookDiv.dataset.attribute].isRead) toggleBook.innerText = 'UnRead';
+		else toggleBook.innerText = 'Read';
 		bookDiv.appendChild(toggleBook);
-		
+
 	let deleteBook = document.createElement('button')
 		deleteBook.setAttribute("id", "removeBook")
 		deleteBook.innerText = 'Remove Book'
 		bookDiv.appendChild(deleteBook);
-
 }
 
-function addEventListeners(){
+function removeCurrentBook(button){
+	let index = button.parentElement.dataset.attribute
+	libraryDisplay.removeChild(button.parentElement)
+	console.log(button.parentElement)
+	myLibrary.splice(index, 1);
+}
+
+function toggleBookStatus(button){
+	let index = button.parentElement.dataset.attribute
+	let bookDiv = button.parentElement
+	let readText = bookDiv.querySelector('#readText')
+	if(myLibrary[index].isRead == true){
+		myLibrary[index].isRead = false
+		button.innerText = "Read"
+		readText.innerText = 'Not read yet'
+	}else{
+		myLibrary[index].isRead = true;
+		button.innerText = 'UnRead'
+		readText.innerText = 'Read'
+	}
+}
+
+function setButtons(){
 	removeBookButtons.forEach(button => {
-		button.addEventListener('click', (e) => {
-			let index = button.parentElement.dataset.attribute
-			myLibrary.splice(index, 1);
-			libraryDisplay.removeChild(button.parentElement)
-		})
-})
-}
+		button.addEventListener('click', () => removeCurrentBook(button));
+	})
+
+	toggleReadButtons.forEach(button => {
+		button.addEventListener('click', () => toggleBookStatus(button))
+	})
+
+};
 
 function createElements(book, bookDiv){
 		for(key in book){
@@ -87,8 +110,8 @@ function createElements(book, bookDiv){
 				content = document.createElement('p')
 				 if(bookContent == 'true') content.innerText = "Read" 
 				 else content.innerText = "Not read yet"
+				 content.setAttribute('id', 'readText')
 				bookDiv.appendChild(content);
-
 			}else{
 				content = document.createElement('p')
 				content.innerText = bookContent;
@@ -100,35 +123,39 @@ function createElements(book, bookDiv){
 function render(){
 	let book = myLibrary[myLibrary.length - 1]
 	let bookDiv = document.createElement('div');
+	bookDiv.setAttribute('data-attribute', myLibrary.length - 1);
 	bookDiv.classList.add('book');
 	createElements(book, bookDiv)
-	addRemoveBookButton(bookDiv);
+	addButtons(bookDiv);
 	libraryDisplay.appendChild(bookDiv);
 
-	bookDiv.setAttribute('data-attribute', myLibrary.length - 1);
 	removeBookButtons = document.querySelectorAll('#removeBook');
-	addEventListeners();
+	toggleReadButtons = document.querySelectorAll('#toggleRead');
+	setButtons();
 }
 
+function defaultBooks(){
+	addBookToLibrary('The Catcher in the Rye', "J.D Salinger", 277, true);
+	render()
+}
 
 addButton.addEventListener('click', openForm)
 
 closeButton.addEventListener('click', closeForm)
 
-
-
 submitBook.addEventListener('click', () =>{
-	let valueArr = getFormValues();
+	let valueArr = getFormValues()
 		if(checkEmptyValues(valueArr)){
 			alert("ERROR! Please fill all of the inputs")
-			emptyFormInputs();
+			emptyFormInputs()
 			return
 
 		}else{
 			addBookToLibrary.apply(this, valueArr);
-			render();
 			closeForm()
 			emptyFormInputs()
+			render()
 		}
 })
 
+defaultBooks() // initialize default set of books
