@@ -5,8 +5,7 @@ const submitBook = document.querySelector('#booksubmit')
 const formElements = [...document.getElementById("addForm").elements]
 const libraryDisplay = document.querySelector('.library');
 
-let removeBookButtons
-let toggleReadButtons
+let bookDivs 
 let checkBox = false
 let myLibrary = [];
 
@@ -66,8 +65,8 @@ function addButtons(bookDiv){
 
 function removeCurrentBook(button){
 	let index = button.parentElement.dataset.attribute
-	libraryDisplay.removeChild(button.parentElement)
-	myLibrary.splice(index, 1);
+	myLibrary.splice(index, 1)
+	render();
 }
 
 function toggleBookStatus(button){
@@ -112,27 +111,31 @@ function createElements(book, bookDiv){
 		}
 }
 
+function clearDisplay(){
+	while (libraryDisplay.firstChild) {
+   	 libraryDisplay.removeChild(libraryDisplay.firstChild);
+  	}
+}
+
 function render(){
-	let book = myLibrary[myLibrary.length - 1]
-	let bookDiv = document.createElement('div');
-	bookDiv.setAttribute('data-attribute', myLibrary.length - 1);
-	bookDiv.classList.add('book');
-	createElements(book, bookDiv);
-	addButtons(bookDiv);
-	libraryDisplay.appendChild(bookDiv);
+	clearDisplay();
+	myLibrary.forEach(book => {
+		let bookDiv = document.createElement('div');
+		bookDiv.setAttribute('data-attribute', myLibrary.indexOf(book));
+		bookDiv.classList.add('book');
+		createElements(book, bookDiv);
+		addButtons(bookDiv);
+		libraryDisplay.appendChild(bookDiv);
+	})
 }
 
 function defaultBooks(){
 	addBookToLibrary('The Catcher in the Rye', "J.D Salinger", 277, true);
-	render()
 	addBookToLibrary('A Wild Sheep Chase', "Haruki Murakami", 358, true);
-	render()
 	addBookToLibrary('To Kill A Mockingbird', "Harper Lee", 230, true);
-	render()
 	addBookToLibrary('Lord of the Flies', "William Golding", 351, false);
-	render()
 	addBookToLibrary('Catch-22', "Joseph Heller", 451, false);
-	render()
+	render();
 }
 
 addButton.addEventListener('click', openForm)
@@ -154,4 +157,4 @@ submitBook.addEventListener('click', () =>{
 		}
 })
 
-defaultBooks() // initialize default set of books
+defaultBooks() // initialize default books
