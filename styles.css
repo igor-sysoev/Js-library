@@ -9,7 +9,7 @@
 
 body {
 	font-family: 'Roboto';
-	height: 100%;
+	height: 100vh;
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -59,7 +59,7 @@ button:hover{
 	flex-wrap: wrap;
 	overflow-x: scroll;
 	overflow-y: hidden;
-	width: 50%;
+	width: 600px;
 	border: 1px solid black;
 	height: 300px;
 
@@ -67,18 +67,15 @@ button:hover{
 }
 
 .container{
-	height: 100vh;
 	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
 }
 
 #addBook{
-	margin-top: 20px;
+	margin: 0;
 	border: 0;
-	width: 150px;
+	width: 100%;
+	padding: 20px 20px;
+	display: inline-block;
 }
 
 .bookform{
@@ -135,15 +132,9 @@ form {
 #booksubmit{
 	background: none;
 	border: 0;
-	padding: 10px 20px;
-	width: 50%;
-	margin: auto;
-	margin-bottom: 10px;
-
 	background-color: #C6211D;
-	border: 1px solid black;
-	padding: 10px 5px;
-	border-radius: 5px;
+	padding: 10px 20px;
+	border-top: 1px solid black;
 }
 
 #booksubmit:hover{
@@ -161,3 +152,12 @@ form {
 	cursor: pointer;
 	color: blue;
 }
+
+.uicontainer{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid black;
+}
+
