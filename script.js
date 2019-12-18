@@ -5,9 +5,9 @@ const submitBook = document.querySelector('#booksubmit')
 const formElements = [...document.getElementById("addForm").elements]
 const libraryDisplay = document.querySelector('.library');
 
-let bookDivs 
 let checkBox = false
 let myLibrary = [];
+let localStore = []
 
 function Book(author, title, pagecount, isRead) {
 	this.author = author
@@ -127,6 +127,7 @@ function render(){
 		addButtons(bookDiv);
 		libraryDisplay.appendChild(bookDiv);
 	})
+	localStorage.setItem('localLibrary', JSON.stringify(myLibrary));
 }
 
 function defaultBooks(){
@@ -157,4 +158,10 @@ submitBook.addEventListener('click', () =>{
 		}
 })
 
-defaultBooks() // initialize default books
+
+if(localStorage.getItem('localLibrary')){
+	myLibrary = JSON.parse(localStorage.getItem('localLibrary'));		//INIT with default if no local storage found.
+	render()
+}else{
+	defaultBooks();
+}
