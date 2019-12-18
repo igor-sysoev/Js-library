@@ -52,18 +52,21 @@ function addButtons(bookDiv){
 		toggleBook.setAttribute("id", "toggleRead")
 		if(myLibrary[bookDiv.dataset.attribute].isRead) toggleBook.innerText = 'UnRead';
 		else toggleBook.innerText = 'Read';
+		toggleBook.addEventListener('click', () => toggleBookStatus(toggleBook));
 		bookDiv.appendChild(toggleBook);
+	
 
 	let deleteBook = document.createElement('button')
 		deleteBook.setAttribute("id", "removeBook")
 		deleteBook.innerText = 'Remove Book'
+		deleteBook.addEventListener('click', () => removeCurrentBook(deleteBook));
 		bookDiv.appendChild(deleteBook);
+	
 }
 
 function removeCurrentBook(button){
 	let index = button.parentElement.dataset.attribute
 	libraryDisplay.removeChild(button.parentElement)
-	console.log(button.parentElement)
 	myLibrary.splice(index, 1);
 }
 
@@ -81,17 +84,6 @@ function toggleBookStatus(button){
 		readText.innerText = 'Read'
 	}
 }
-
-function setButtons(){
-	removeBookButtons.forEach(button => {
-		button.addEventListener('click', () => removeCurrentBook(button));
-	})
-
-	toggleReadButtons.forEach(button => {
-		button.addEventListener('click', () => toggleBookStatus(button))
-	})
-
-};
 
 function createElements(book, bookDiv){
 		for(key in book){
@@ -125,17 +117,21 @@ function render(){
 	let bookDiv = document.createElement('div');
 	bookDiv.setAttribute('data-attribute', myLibrary.length - 1);
 	bookDiv.classList.add('book');
-	createElements(book, bookDiv)
+	createElements(book, bookDiv);
 	addButtons(bookDiv);
 	libraryDisplay.appendChild(bookDiv);
-
-	removeBookButtons = document.querySelectorAll('#removeBook');
-	toggleReadButtons = document.querySelectorAll('#toggleRead');
-	setButtons();
 }
 
 function defaultBooks(){
 	addBookToLibrary('The Catcher in the Rye', "J.D Salinger", 277, true);
+	render()
+	addBookToLibrary('A Wild Sheep Chase', "Haruki Murakami", 358, true);
+	render()
+	addBookToLibrary('To Kill A Mockingbird', "Harper Lee", 230, true);
+	render()
+	addBookToLibrary('Lord of the Flies', "William Golding", 351, false);
+	render()
+	addBookToLibrary('Catch-22', "Joseph Heller", 451, false);
 	render()
 }
 

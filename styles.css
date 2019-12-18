@@ -14,7 +14,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
+    background-color: #C6311D;;
 }
 
 button {
@@ -73,9 +73,6 @@ button:hover{
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-
-	background-image: url(background1.jpeg);
-	background-size: cover;
 }
 
 #addBook{
